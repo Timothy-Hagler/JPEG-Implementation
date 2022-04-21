@@ -43,45 +43,6 @@ Step IV: Error Computation
 2. Compute the Peak Signal-to-Noise Ratio (I is the original image and _I’_ is the
     output image after Step III).
 
-#  
-
-```
-= =
-```
-### = −
-
-```
-M
-```
-```
-y
-```
-```
-N
-```
-```
-x
-```
-```
-I x y I x y
-MN
-```
-### MSE
-
-```
-1 1
-```
-(^1) ( , ) '( , ) 2
-
-### MSE
-
-### PSNR
-
-### 255
-
-```
-= 20 *log 10
-```
 Step V: Group Report
 
 
