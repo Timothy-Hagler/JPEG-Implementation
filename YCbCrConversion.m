@@ -1,12 +1,12 @@
 clear all;
 
-% Author: Timmy Hagler
+% Team: Team Team-Team 
 % CS 443-01
-% 3-31-22
+% 05-02-22
 
 % Load images to subsample
-img1=imread('mandril_color.png');
-img2=imread('eldenring.png');
+img1=imread('alu.tif');
+img2=imread('pepper.png');
 
 % Normalize images
 img1= double(img1)./255;
@@ -50,7 +50,7 @@ subplot(2,2,3),imshow(newImg2);
 subplot(2,2,4),imshow(newImg4);
 
 % Save each image to a file
-imwrite(newImg1,"mandrill_Subsample.png");
-imwrite(newImg3,"mandrill_cosited.png");
-imwrite(newImg2,"eldenring_Subsample.png");
-imwrite(newImg4,"eldenring_cosited.png");
+imwrite(newImg1,"alu_Subsample.png");
+imwrite(newImg3,"alu_cosited.png");
+imwrite(newImg2,"pepper_Subsample.png");
+imwrite(newImg4,"pepper_cosited.png");
