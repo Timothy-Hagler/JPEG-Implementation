@@ -1,8 +1,6 @@
 function idctimage = IDCT(image, N)
     image = double(image);
     
-    %freqDomainImage = calculateDCT(image, N);
-    
     y = image(:,:,1);
     cb = image(:,:,2);
     cr = image(:,:,3);
@@ -30,22 +28,22 @@ function out = calculateIDCT(image, N)
                     for x = 1:N % Iterate from 1 through N for row
                         for y = 1:N % Iterate from 1 through for column
                             pixel = image(u,v);
-                            cosUX = cos(((2 * x + 1) * i * pi) / (2 * N));
-                            cosVY = cos(((2 * y + 1) * j * pi) / (2 * N));
-                            if i == 0
-                                Ci = 1 / sqrt(2);
-                            else
-                                Ci = 1;
-                            end
+                            cosUX = cos(((2 * i + 1) * u * pi) / (2 * N));
+                            cosVY = cos(((2 * j + 1) * v * pi) / (2 * N));
                             if u == 0
-                                Cj = 1 / sqrt(2);
+                                Cu = 1 / sqrt(2);
                             else
-                                Cj = 1;
+                                Cu = 1;
+                            end
+                            if v == 0
+                                Cv = 1 / sqrt(2);
+                            else
+                                Cv = 1;
                             end
 
                             % Calculate the double sigma value for the specific
                             % index of the idctBlock
-                            doubleSigma = doubleSigma + (((2 / N) * Ci * Cj) * (pixel * cosUX * cosVY));
+                            doubleSigma = doubleSigma + (((2 / N) * Cu * Cv) * (pixel * cosUX * cosVY));
                             % If the u or v value is 0 use 1/sqrt(2)
                             % Otherwise use 1
                             
