@@ -30,12 +30,12 @@ function out = calculateDCT(image, N)
                     for x = 1:N % Iterate from 1 through N for row
                         for y = 1:N % Iterate from 1 through for column
                             pixel = image(i,j);
-                            cosIX = cos(((2 * i + 1) * x * pi) / 2 * N);
-                            cosJY = cos(((2 * j + 1) * y * pi) / 2 * N);
+                            cosIX = cos(((2 * x + 1) * u * pi) / (2 * N));
+                            cosJY = cos(((2 * y + 1) * v * pi) / (2 * N));
                             
                             % Calculate the double sigma value for the specific
                             % index of the dctBlock
-                            doubleSigma = doubleSigma + pixel * cosIX * cosJY;
+                            doubleSigma = doubleSigma + (pixel * cosIX * cosJY);
                         end
                     end
                     % If the u or v value is 0 use 1/sqrt(2)
