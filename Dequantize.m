@@ -22,7 +22,7 @@ function quantizedImage= Dequantize(image, N)
             
             quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
             quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
-            quantizedImage(i:i+N-1,j:j+N-1,1) = newCr;
+            quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
         end
     end
     quantizedImage = round(quantizedImage);

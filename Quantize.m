@@ -9,7 +9,7 @@ function quantizedImage= Quantize(image, qf , N)
     
     quantizedImage = image;
 
-    if qf > 50
+    if qf >= 50
         scaling_factor = (100 - qf) / 50;
     else
         scaling_factor = (50/qf);
@@ -22,7 +22,9 @@ function quantizedImage= Quantize(image, qf , N)
         QLx = ones(N,N);
         QCx = ones(N,N);
     end
-
+       
+    QLx = double(uint8(QLx));
+    QCx = double(uint8(QCx));
 
     for i = 1:N:rowsize
         for j = 1:N:colsize
@@ -37,7 +39,7 @@ function quantizedImage= Quantize(image, qf , N)
             
             quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
             quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
-            quantizedImage(i:i+N-1,j:j+N-1,1) = newCr;
+            quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
         end
     end
     quantizedImage = round(quantizedImage);
