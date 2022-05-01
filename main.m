@@ -1,8 +1,8 @@
 N = 8;
 
-[img, ~, ~] = imread("GroupProject/pepper.png");
+[img, ~, ~] = imread("pepper.png");
 
-yuvimg = rgb2ycbcr(img);
+yuvimg = rgb2ycbcr(double(img));
 
 imwrite(yuvimg, "pepperyuv.png");
 
@@ -22,7 +22,7 @@ dequantizedimg = Dequantize(quantizeimg, N);
 
 imwrite(quantizeimg, "pepperdequantize.png");
 
-idctimage = IDCT(dequantizedimg, N);
+idctimage = IDCT(dctimg, N);
 
 imwrite(idctimage, "pepperidct.png");
 
