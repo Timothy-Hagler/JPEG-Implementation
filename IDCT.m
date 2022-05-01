@@ -6,47 +6,41 @@ function idctimage = IDCT(image, N)
     cr = image(:,:,3);
     
     newY = calculateIDCT(y, N);
-    newCb = calculateIDCT(cb, N);
-    newCr = calculateIDCT(cr, N);
+    %newCb = calculateIDCT(cb, N);
+    %newCr = calculateIDCT(cr, N);
     
-    idctimage = cat(3, newY, newCb, newCr);
+    idctimage = cat(3, newY, cb, cr);
 end
 
 function out = calculateIDCT(image, N)
     [rowsize,colsize, ~] = size(image);
     newImg= size(image);
     
-
-    for x=1:8:rowsize
-        for y=1:8:colsize
-            for i=1:8
-                for j=1:8
-                    sum= 0;
-                    
-                    
-                    for u=1:N
-                        for v=1:N
-                            Cu= 1;
-                            Cv= 1;
-                            if u==0
-                                Cu= sqrt(2) / 2;
+   for i=1:8:rowsize
+    e = 1;
+       for j=1:8:colsize
+           for x = 1:8
+                for y = 1:8
+                    comp = 0;
+                    for m = 1:8
+                        for n = 1:8
+                            if m == 1
+                                u = 1/sqrt(2);
+                            else
+                                u = 1;
                             end
-                            if v==0
-                                Cv= sqrt(2) / 2;
+                            if n == 1
+                                v = 1/sqrt(2);
+                            else
+                                v = 1;
                             end
-                            sum= sum + ((2 * Cu * Cv) / N) * (cos(((2 * i + 1)*u*pi)/(2*N))*cos(((2 * j + 1)*v*pi)/(2*N))) * image(i,j);
-                           % sum= ((2 * Cu * Cv) / N) * sum;
+                            
+                          newImg(m, n) = v*u*comp;
                         end
                     end
-        
-                    newImg(i,j)= sum;
-                   % out(x:x+i, y:y+j)= sum;
-                    
                 end
-                
+                out(i:i+N-1, j:j+N-1)= newImg(:,:);
             end
-            out(x:x+N-1, y:y+N-1)= newImg(:,:);
-           % newImg= zeros(size(image));
         end
-    end
+   end
 end

@@ -11,7 +11,7 @@ function freqDomainImage = DCT(image, N)
     newCb = calculateDCT(cb, N);
     newCr = calculateDCT(cr, N);
     
-    freqDomainImage = cat(3, newY, newCb, newCr);
+    freqDomainImage = cat(3, newY, cb, cr);
 end
 
 function out = calculateDCT(image, N)
@@ -19,34 +19,34 @@ function out = calculateDCT(image, N)
     newImg= size(image);
     
 
-    for x=1:8:rowsize
-        for y=1:8:colsize
-            for u=1:8
-                for v=1:8
-                    sum= 0;
-                    Cu= 1;
-                    Cv= 1;
-                    if u==0
-                        Cu= sqrt(2) / 2;
-                    end
-                    if v==0
-                        Cv= sqrt(2) / 2;
-                    end
-                    
-                    for i=1:N
-                        for j=1:N
-                            sum= sum + (cos(((2 * i + 1)*u*pi)/(2*N))*cos(((2 * j + 1)*v*pi)/(2*N))) * image(x,y);
-                        end
-                    end
-        
-                    newImg(u,v)= ((2 * Cu * Cv) / N) * sum;
-                    
+   for i=1:8:rowsize
+    e = 1;
+    for j=1:8:colsize
+        block = image(i:i+7,j:j+7);
+        cent = double(block) - 128;
+        for m=1:8
+            for n=1:8
+                if m == 1
+                    u = 1/sqrt(8);
+                else
+                    u = sqrt(2/8);
                 end
-            end
-            out(x:x+N-1, y:y+N-1)= newImg(:,:);
+                if n == 1
+                    v = 1/sqrt(8);
+                else
+                    v = sqrt(2/8);
+                end
+                comp = 0;
+                for x=1:8
+                    for y=1:8
+                        comp = comp + cent(x, y)*(cos((((2*(x-1))+1)*(m-1)*pi)/16))*(cos((((2*(y-1))+1)*(n-1)*pi)/16));
+                    end
+                end
+                  newImg(m, n) = v*u*comp;
+              end
         end
+        out(i:i+N-1, j:j+N-1)= newImg(:,:);
+
     end
-
-    %out= newImg;
-
+   end
 end
