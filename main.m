@@ -2,7 +2,7 @@ N = 8;
 
 [img, ~, ~] = imread("pepper.png");
 
-yuvimg = rgb2ycbcr(double(img));
+yuvimg = rgb2ycbcr(img);
 
 imwrite(yuvimg, "pepperyuv.png");
 
@@ -20,12 +20,12 @@ imwrite(quantizeimg, "pepperquantize.png");
 
 dequantizedimg = Dequantize(quantizeimg, N);
 
-imwrite(quantizeimg, "pepperdequantize.png");
+imwrite(dequantizedimg, "pepperdequantize.png");
 
 idctimage = IDCT(dctimg, N);
 
 imwrite(idctimage, "pepperidct.png");
 
-rgbimg = ycbcr2rgb(idctimage);
+rgbimg = ycbcr2rgb(uint8(idctimage));
 
 imwrite(rgbimg,"pepperrgb.png");
