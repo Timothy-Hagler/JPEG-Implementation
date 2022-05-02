@@ -34,6 +34,6 @@ MSEvalue = MSE(img, rgbimg);
 
 disp(MSEvalue);
 
-psnrVal = PSNRvalue(MSE);
+psnrVal = PSNRvalue(MSEvalue);
 
 disp(psnrVal);
