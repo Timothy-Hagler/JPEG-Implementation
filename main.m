@@ -1,6 +1,6 @@
 N = 8;
 
-[img, ~, ~] = imread("GroupProject/pepper.png");
+[img, ~, ~] = imread("pepper.png");
 
 yuvimg = rgb2ycbcr(img);
 
@@ -34,6 +34,6 @@ MSEvalue = MSE(img, rgbimg);
 
 disp(MSEvalue);
 
-psnrVal = PSNRvalue(MSEvalue);
+psnrVal = PSNRvalue(double(MSEvalue));
 
 disp(psnrVal);
