@@ -17,15 +17,15 @@ dct2img = dct2(subsampledimage(:,:,1), 8,8);
 
 imwrite(dctimg,"pepperdct.png");
 
-quantizeimg = Quantize(dctimg, 100, N);
+quantizeimg = Quantize(dctimg, 50, N);
 
 imwrite(quantizeimg, "pepperquantize.png");
 
-dequantizedimg = Dequantize(quantizeimg, N);
+dequantizedimg = Dequantize(quantizeimg, N, 50);
 
 imwrite(dequantizedimg, "pepperdequantize.png");
 
-idctimage = IDCT(quantizeimg, N);
+idctimage = IDCT(dequantizedimg, N);
 
 imwrite(idctimage, "pepperidct.png");
 
@@ -62,11 +62,11 @@ dctimg = DCT(subsampledimage, N);
 
 imwrite(dctimg,"aludct.png");
 
-quantizeimg = Quantize(dctimg, 100, N);
+quantizeimg = Quantize(dctimg, 50, N);
 
 imwrite(quantizeimg, "aluquantize.png");
 
-dequantizedimg = Dequantize(quantizeimg, N);
+dequantizedimg = Dequantize(quantizeimg, N, 50);
 
 imwrite(dequantizedimg, "aludequantize.png");
 
