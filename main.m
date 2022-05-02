@@ -29,3 +29,7 @@ imwrite(idctimage, "pepperidct.png");
 rgbimg = ycbcr2rgb(idctimage);
 
 imwrite(rgbimg,"pepperrgb.png");
+
+MSEvalue = MSE(img, rgbimg);
+
+disp(MSEvalue);
