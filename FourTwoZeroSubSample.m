@@ -1,6 +1,6 @@
 function [subImg] = FourTwoZeroSubSample(img)
 %FourTwoZeroSubSample Subsamples a given image with 4:2:0 subsampling
-
+disp("running subsample")
 [r,c,~]=size(img);
 subImg= img;
 
