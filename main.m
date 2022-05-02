@@ -4,7 +4,6 @@ N = 8;
 [img, ~, ~] = imread("pepper.png");
 
 yuvimg = rgb2ycbcr(img);
-rgb = ycbcr2rgb(yuvimg);
 
 imwrite(yuvimg, "pepperyuv.png");
 
@@ -13,15 +12,14 @@ subsampledimage = FourTwoZeroSubSample(yuvimg);
 imwrite(subsampledimage, "peppersubbed.png");
 
 dctimg = DCT(subsampledimage, N);
-dct2img = dct2(subsampledimage(:,:,1), 8,8);
 
 imwrite(dctimg,"pepperdct.png");
 
-quantizeimg = Quantize(dctimg, 50, N);
+quantizeimg = Quantize(dctimg, 100, N);
 
 imwrite(quantizeimg, "pepperquantize.png");
 
-dequantizedimg = Dequantize(quantizeimg, N, 50);
+dequantizedimg = Dequantize(quantizeimg, N, 100);
 
 imwrite(dequantizedimg, "pepperdequantize.png");
 
@@ -58,7 +56,6 @@ subsampledimage = FourTwoZeroSubSample(yuvimg);
 imwrite(subsampledimage, "alusubbed.png");
 
 dctimg = DCT(subsampledimage, N);
-%dct2img = dct2(subsampledimage(1:8,1:8,1), 8,8);
 
 imwrite(dctimg,"aludct.png");
 
@@ -70,7 +67,7 @@ dequantizedimg = Dequantize(quantizeimg, N, 50);
 
 imwrite(dequantizedimg, "aludequantize.png");
 
-idctimage = IDCT(dctimg, N);
+idctimage = IDCT(dequantizedimg, N);
 
 imwrite(idctimage, "aluidct.png");
 

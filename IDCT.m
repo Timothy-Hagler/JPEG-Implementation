@@ -18,8 +18,8 @@ end
 function out = calculateIDCT(in, N)
     [rowsize,colsize, ~] = size(in);
     f = in;
-    for x = 1:N:rowsize % Iterate through all the rows
-        for y = 1:N:colsize % Iterate through all the columns
+    for x = 1:N+1:rowsize % Iterate through all the rows
+        for y = 1:N+1:colsize % Iterate through all the columns
             if x+N-1 <= rowsize && y+N-1 <= colsize
                 F = in(x:x+N-1, y:y+N-1);
                 idcted = actuallyDoTheCalculationForIDCT(F,N);
@@ -33,8 +33,7 @@ end
 function out = actuallyDoTheCalculationForIDCT(in,N)
 f = in;
 
-doubleSigma = 0; % Used for storing the value of the double 
-                 % sigma resets to 0 after each
+doubleSigma = 0; % Used for storing the value of the double sigma
 
 
                  
@@ -65,6 +64,6 @@ for u = 1:N
     end
 end
 f(1, 1) = doubleSigma;
-        % On next iteration, doubleSigma gets reset to 0
+       
 out = f;
 end

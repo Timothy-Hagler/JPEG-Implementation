@@ -1,7 +1,6 @@
 function freqDomainImage = DCT(image, N)
     disp("running dct");
     image = (image);
-    %freqDomainImage = image;
     
     y = image(:,:,1);
     cb = image(:,:,2);
@@ -33,12 +32,8 @@ end
 
 function out = actuallyDoThecalculationForDCT(in, N)
 f = in;
-% u is the current row index in the block
-doubleSigma = 0; % Used for storing the value of the double 
-                 % sigma. resets to 0 after each
-                 % iteration
 
-
+doubleSigma = 0; % Used for storing the value of the double sigma.
 
 % i is the current first sigma value
 for i = 1:N % Iterate from 1 through N for row
