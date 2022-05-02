@@ -24,25 +24,28 @@ disp("running quant");
     if scaling_factor ~= 0
         QLx = round(luminanceMatrix * scaling_factor);
         QCx = round(chrominanceMatrix * scaling_factor);
-        for i = 1:N:rowsize
-            for j = 1:N:colsize
-    
-                y = image(i:i+N-1,j:j+N-1,1);
-                cb = image(i:i+N-1,j:j+N-1,2);
-                cr = image(i:i+N-1,j:j+N-1,3);
-    
-                newY = y ./ QLx;
-                newCb = cb ./ QCx;
-                newCr = cr ./ QCx;
-                
-                quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
-                quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
-                quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
-            end
-        end
-        quantizedImage = round(quantizedImage);
+        
     else
-        quantizedImage = image;
+        QLx = ones(N,N);
+        QCx = ones(N,N);
     end
-       
+    QLx = double(uint8(QLx));
+    QCx = double(uint8(QCx));
+   for i = 1:N:rowsize
+        for j = 1:N:colsize
+
+            y = image(i:i+N-1,j:j+N-1,1);
+            cb = image(i:i+N-1,j:j+N-1,2);
+            cr = image(i:i+N-1,j:j+N-1,3);
+
+            newY = y ./ QLx;
+            newCb = cb ./ QCx;
+            newCr = cr ./ QCx;
+            
+            quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
+            quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
+            quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
+        end
+    end
+    quantizedImage = round(quantizedImage);
 end

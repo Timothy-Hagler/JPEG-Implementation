@@ -14,7 +14,7 @@ dctimg = DCT(subsampledimage, N);
 
 imwrite(dctimg,"pepperdct.png");
 
-quantizeimg = Quantize(dctimg, 100, N);
+quantizeimg = Quantize(dctimg, 10, N);
 
 imwrite(quantizeimg, "pepperquantize.png");
 
