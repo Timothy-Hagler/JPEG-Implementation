@@ -27,9 +27,55 @@ idctimage = IDCT(dequantizedimg, N);
 
 imwrite(idctimage, "pepperidct.png");
 
-rgbimg = ycbcr2rgb(idctimage);
+rgbimg = ycbcr2rgb(dequantizedimg);
+
 
 imwrite(rgbimg,"pepperrgb.png");
+
+MSEvalue = MSE(img, rgbimg);
+
+disp(MSEvalue);
+
+psnrVal = PSNRvalue(MSEvalue);
+
+disp(psnrVal);
+
+
+
+
+% ALU.tif file
+
+[img, ~, ~] = imread("alu.tif");
+
+yuvimg = rgb2ycbcr(img);
+
+imwrite(yuvimg, "aluyuv.png");
+
+subsampledimage = FourTwoZeroSubSample(yuvimg);
+
+imwrite(subsampledimage, "alusubbed.png");
+
+dctimg = DCT(subsampledimage, N);
+%dct2img = dct2(subsampledimage(1:8,1:8,1), 8,8);
+
+imwrite(dctimg,"aludct.png");
+
+quantizeimg = Quantize(dctimg, 100, N);
+
+imwrite(quantizeimg, "aluquantize.png");
+
+dequantizedimg = Dequantize(quantizeimg, N);
+
+imwrite(dequantizedimg, "aludequantize.png");
+
+idctimage = IDCT(dequantizedimg, N);
+
+imwrite(idctimage, "aluidct.png");
+
+rgbimg = ycbcr2rgb(dequantizedimg);
+
+
+imwrite(rgbimg,"alurgb.png");
 
 MSEvalue = MSE(img, rgbimg);
 

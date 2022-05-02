@@ -11,18 +11,19 @@ function quantizedImage= Dequantize(image, N)
 
     for i = 1:N:rowsize
         for j = 1:N:colsize
-
-            y = image(i:i+N-1,j:j+N-1,1);
-            cb = image(i:i+N-1,j:j+N-1,2);
-            cr = image(i:i+N-1,j:j+N-1,3);
-
-            newY = y .* luminanceMatrix;
-            newCb = cb .* chrominanceMatrix;
-            newCr = cr .* chrominanceMatrix;
-            
-            quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
-            quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
-            quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
+            if i+N-1 <= rowsize && j+N-1 <= colsize
+                y = image(i:i+N-1,j:j+N-1,1);
+                cb = image(i:i+N-1,j:j+N-1,2);
+                cr = image(i:i+N-1,j:j+N-1,3);
+    
+                newY = y .* luminanceMatrix;
+                newCb = cb .* chrominanceMatrix;
+                newCr = cr .* chrominanceMatrix;
+                
+                quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
+                quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
+                quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
+            end
         end
     end
     quantizedImage = round(quantizedImage);

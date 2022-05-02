@@ -20,10 +20,11 @@ function out = calculateDCT(in, N)
     F = in;
     for x = 1:N:rowsize % Get every 8th row of the input image
         for y = 1:N:colsize % Get every 8th column of the input image
-
-            f = in(x:x+N-1,y:y+N-1); % Create an NxN matrix filled with 0s to store the current block in
-            dcted = actuallyDoThecalculationForDCT(f,N);
-            F(x:x+N-1,y:y+N-1) = dcted;
+            if x+N-1 <= rowsize && y+N-1 <= colsize
+                f = in(x:x+N-1,y:y+N-1); % Create an NxN matrix filled with 0s to store the current block in
+                dcted = actuallyDoThecalculationForDCT(f,N);
+                F(x:x+N-1,y:y+N-1) = dcted;
+            end
         end
     end
     out = F;

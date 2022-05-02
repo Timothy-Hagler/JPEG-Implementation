@@ -1,10 +1,10 @@
 function idctimage = IDCT(image, N)
     disp("running idct");
-    image = double(image);
+    image = (image);
 
-    y = image(:,:,1)-128;
-    cb = image(:,:,2)-128;
-    cr = image(:,:,3)-128;
+    y = image(:,:,1).*255;
+    cb = image(:,:,2).*255;
+    cr = image(:,:,3).*255;
     
     newY = calculateIDCT(y,N);
     newCb = calculateIDCT(cb,N);
@@ -20,9 +20,11 @@ function out = calculateIDCT(in, N)
     f = in;
     for x = 1:N:rowsize % Iterate through all the rows
         for y = 1:N:colsize % Iterate through all the columns
-            F = in(x:x+N-1, y:y+N-1);
-            idcted = actuallyDoTheCalculationForIDCT(F,N);
-            f(x:x+N-1, y:y+N-1) = idcted;
+            if x+N-1 <= rowsize && y+N-1 <= colsize
+                F = in(x:x+N-1, y:y+N-1);
+                idcted = actuallyDoTheCalculationForIDCT(F,N);
+                f(x:x+N-1, y:y+N-1) = idcted;
+            end
         end
     end
     out = f;
@@ -41,8 +43,8 @@ for i = 1:1
         
                 Fpixel = in(i, j);
         
-                cosIU = cos(((2 * (i-1) + 1) * (u-1) * pi) / (2 * N));
-                cosJV = cos(((2 * (j-1) + 1) * (v-1) * pi) / (2 * N));
+                cosIU = cos(((2 * (i) + 1) * (u) * pi) / (2 * N));
+                cosJV = cos(((2 * (j) + 1) * (v) * pi) / (2 * N));
         
                 % If the u or v value is 1 use 1/sqrt(2)
                 % Otherwise use 1
