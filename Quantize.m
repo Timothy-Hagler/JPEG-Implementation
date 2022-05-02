@@ -13,7 +13,7 @@ disp("running quant");
     chrominanceMatrix = [17 18 24 47 99 99 99 99; 18 21 26 66 99 99 99 99; 24 26 56 99 99 99 99 99; 47 66 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99];
     [rowsize,colsize, ~] = size(image);
     
-    quantizedImage = image;
+    quantizedImage = double(image);
 
     if qf >= 50
         scaling_factor = (100 - qf) / 50;
@@ -48,5 +48,5 @@ disp("running quant");
              end
         end
     end
-    quantizedImage = uint8(quantizedImage);
+    quantizedImage = uint8((quantizedImage));
 end

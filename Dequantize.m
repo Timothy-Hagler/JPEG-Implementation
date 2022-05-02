@@ -7,7 +7,7 @@ function quantizedImage= Dequantize(image, N)
     chrominanceMatrix = [17 18 24 47 99 99 99 99; 18 21 26 66 99 99 99 99; 24 26 56 99 99 99 99 99; 47 66 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99; 99 99 99 99 99 99 99 99];
     [rowsize,colsize, ~] = size(image);
     
-    quantizedImage = image;
+    quantizedImage = (image);
 
     for i = 1:N:rowsize
         for j = 1:N:colsize
@@ -26,5 +26,5 @@ function quantizedImage= Dequantize(image, N)
             end
         end
     end
-   quantizedImage = (quantizedImage);
+   quantizedImage = ((quantizedImage));
 end
