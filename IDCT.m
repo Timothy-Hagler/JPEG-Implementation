@@ -32,41 +32,37 @@ end
 
 function out = actuallyDoTheCalculationForIDCT(in,N)
 f = in;
-for i = 1:1
-    for j = 1:1
-    
-        doubleSigma = 0; % Used for storing the value of the double 
-                         % sigma resets to 0 after each
-        
-        for u = 1:N
-            for v = 1:N
-        
-                Fpixel = in(i, j);
-        
-                cosIU = cos(((2 * (i) + 1) * (u) * pi) / (2 * N));
-                cosJV = cos(((2 * (j) + 1) * (v) * pi) / (2 * N));
-        
-                % If the u or v value is 1 use 1/sqrt(2)
-                % Otherwise use 1
-                if u == 1
-                    Cu = 1 / sqrt(2);
-                else
-                    Cu = 1;
-                end
-                if v == 1
-                    Cv = 1 / sqrt(2);
-                else
-                    Cv = 1;
-                end
-        
-                % Calculate the double sigma value for the specific
-                % index of the idctBlock
-                doubleSigma = doubleSigma + ((((2 * Cu * Cv) / N) * Fpixel * cosIU * cosJV));
-            end
+
+doubleSigma = 0; % Used for storing the value of the double 
+                 % sigma resets to 0 after each
+
+for u = 1:N
+    for v = 1:N
+
+        Fpixel = in(1, 1);
+
+        cosIU = cos(((2 * (1) + 1) * (u) * pi) / (2 * N));
+        cosJV = cos(((2 * (1) + 1) * (v) * pi) / (2 * N));
+
+        % If the u or v value is 1 use 1/sqrt(2)
+        % Otherwise use 1
+        if u == 1
+            Cu = 1 / sqrt(2);
+        else
+            Cu = 1;
         end
-        f(i, j) = doubleSigma;
-        % On next iteration, doubleSigma gets reset to 0
+        if v == 1
+            Cv = 1 / sqrt(2);
+        else
+            Cv = 1;
+        end
+
+        % Calculate the double sigma value for the specific
+        % index of the idctBlock
+        doubleSigma = doubleSigma + ((((2 * Cu * Cv) / N) * Fpixel * cosIU * cosJV));
     end
 end
+f(1, 1) = doubleSigma;
+        % On next iteration, doubleSigma gets reset to 0
 out = f;
 end

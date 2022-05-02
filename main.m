@@ -1,5 +1,6 @@
 N = 8;
 
+% Pepper file
 [img, ~, ~] = imread("pepper.png");
 
 yuvimg = rgb2ycbcr(img);
@@ -81,6 +82,6 @@ MSEvalue = MSE(img, rgbimg);
 
 disp(MSEvalue);
 
-psnrVal = PSNRvalue(MSEvalue);
+psnrVal = PSNRvalue(double(MSEvalue));
 
 disp(psnrVal);

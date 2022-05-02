@@ -33,48 +33,35 @@ end
 function out = actuallyDoThecalculationForDCT(in, N)
 f = in;
 % u is the current row index in the block
-for u = 1:1 % Iterate from 1 through N
+doubleSigma = 0; % Used for storing the value of the double 
+                 % sigma. resets to 0 after each
+                 % iteration
 
-    % v is the current column index in the block
-    for v = 1:1 % Iterate from 1 through N
+% i is the current first sigma value
+for i = 1:N % Iterate from 1 through N for row
 
-        doubleSigma = 0; % Used for storing the value of the double 
-                         % sigma. resets to 0 after each
-                         % iteration
+    % j is the current second sigma value
+    for j = 1:N % Iterate from 1 through for column
+        % fpixel is the pixel value of the block index
+        % currently being operated on
+        fpixel = f(i,j);
+
+        cosIX = cos(((2 * (i-1) + 1) * (0) * pi) / (2 * N));
+        cosJY = cos(((2 * (j-1) + 1) * (0) * pi) / (2 * N));
         
-        % i is the current first sigma value
-        for i = 1:N % Iterate from 1 through N for row
-
-            % j is the current second sigma value
-            for j = 1:N % Iterate from 1 through for column
-                % fpixel is the pixel value of the block index
-                % currently being operated on
-                fpixel = f(i,j);
-
-                cosIX = cos(((2 * (i-1) + 1) * (u-1) * pi) / (2 * N));
-                cosJY = cos(((2 * (j-1) + 1) * (v-1) * pi) / (2 * N));
-                
-                % Calculate the double sigma value for the specific
-                % index of the block
-                doubleSigma = doubleSigma + (fpixel * cosIX * cosJY);
-            end
-        end
-        % If the u or v value is 1 use 1/sqrt(2)
-        % Otherwise use 1
-        if u == 1
-            Cu = 1 / sqrt(2);
-        else
-            Cu = 1;
-        end
-        if v == 1
-            Cv = 1 / sqrt(2);
-        else
-            Cv = 1;
-        end
-        % Storing the calculation 
-        f(u,v) = (2 / N) * Cu * Cv * doubleSigma;
-        % On next iteration, doubleSigma gets reset to 0
+        % Calculate the double sigma value for the specific
+        % index of the block
+        doubleSigma = doubleSigma + (fpixel * cosIX * cosJY);
     end
 end
+% If the u or v value is 1 use 1/sqrt(2)
+% Otherwise use 1
+Cu = 1 / sqrt(2);
+Cv = 1 / sqrt(2);
+% Storing the calculation 
+f(1,1) = (2 / N) * Cu * Cv * doubleSigma;
+
+    
+
 out = f;
 end
