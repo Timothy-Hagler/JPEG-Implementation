@@ -12,7 +12,7 @@ N=8;
             outputpixel = output(i ,j);
             diff = originalpixel - outputpixel; 
             squared = diff * diff;
-            sum =+diff;
+            sum = sum + squared;
         end
     end
 

@@ -2,9 +2,9 @@ function idctimage = IDCT(image, N)
     disp("running idct");
     image = (image);
 
-    y = image(:,:,1).*255;
-    cb = image(:,:,2).*255;
-    cr = image(:,:,3).*255;
+    y = image(:,:,1);
+    cb = image(:,:,2);
+    cr = image(:,:,3);
     
     newY = calculateIDCT(y,N);
     newCb = calculateIDCT(cb,N);
@@ -36,13 +36,15 @@ f = in;
 doubleSigma = 0; % Used for storing the value of the double 
                  % sigma resets to 0 after each
 
+
+                 
 for u = 1:N
     for v = 1:N
 
         Fpixel = in(1, 1);
 
-        cosIU = cos(((2 * (1) + 1) * (u) * pi) / (2 * N));
-        cosJV = cos(((2 * (1) + 1) * (v) * pi) / (2 * N));
+        cosIU = cos(((2 * (0) + 1) * (u) * pi) / (2 * N));
+        cosJV = cos(((2 * (0) + 1) * (v) * pi) / (2 * N));
 
         % If the u or v value is 1 use 1/sqrt(2)
         % Otherwise use 1

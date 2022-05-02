@@ -26,5 +26,5 @@ function quantizedImage= Dequantize(image, N)
             end
         end
     end
-    quantizedImage = round(quantizedImage);
+   quantizedImage = (quantizedImage);
 end

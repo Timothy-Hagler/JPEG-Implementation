@@ -22,15 +22,15 @@ disp("running quant");
     end
 
     if scaling_factor ~= 0
-        QLx = round(luminanceMatrix * scaling_factor);
-        QCx = round(chrominanceMatrix * scaling_factor);
+        QLx = (luminanceMatrix * scaling_factor);
+        QCx = (chrominanceMatrix * scaling_factor);
         
     else
         QLx = ones(N,N);
         QCx = ones(N,N);
     end
-    QLx = double(uint8(QLx));
-    QCx = double(uint8(QCx));
+    QLx = ((QLx));
+    QCx = ((QCx));
    for i = 1:N:rowsize
         for j = 1:N:colsize
             if i+N-1 <= rowsize && j+N-1 <= colsize
@@ -45,8 +45,8 @@ disp("running quant");
                 quantizedImage(i:i+N-1,j:j+N-1,1) = newY;
                 quantizedImage(i:i+N-1,j:j+N-1,2) = newCb;
                 quantizedImage(i:i+N-1,j:j+N-1,3) = newCr;
-                end
+             end
         end
     end
-    quantizedImage = round(quantizedImage);
+    quantizedImage = uint8(quantizedImage);
 end

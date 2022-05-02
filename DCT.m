@@ -1,10 +1,11 @@
 function freqDomainImage = DCT(image, N)
     disp("running dct");
-    image = double(image);
+    image = (image);
+    %freqDomainImage = image;
     
-    y = image(:,:,1)-128;
-    cb = image(:,:,2)-128;
-    cr = image(:,:,3)-128;
+    y = image(:,:,1);
+    cb = image(:,:,2);
+    cr = image(:,:,3);
     
     newY = calculateDCT(y, N);
     newCb = calculateDCT(cb, N);
@@ -37,6 +38,8 @@ doubleSigma = 0; % Used for storing the value of the double
                  % sigma. resets to 0 after each
                  % iteration
 
+
+
 % i is the current first sigma value
 for i = 1:N % Iterate from 1 through N for row
 
@@ -46,8 +49,8 @@ for i = 1:N % Iterate from 1 through N for row
         % currently being operated on
         fpixel = f(i,j);
 
-        cosIX = cos(((2 * (i-1) + 1) * (0) * pi) / (2 * N));
-        cosJY = cos(((2 * (j-1) + 1) * (0) * pi) / (2 * N));
+        cosIX = cos(((2 * (i) + 1) * (0) * pi) / (2 * N));
+        cosJY = cos(((2 * (j) + 1) * (0) * pi) / (2 * N));
         
         % Calculate the double sigma value for the specific
         % index of the block
