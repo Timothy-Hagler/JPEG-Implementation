@@ -33,3 +33,7 @@ imwrite(rgbimg,"pepperrgb.png");
 MSEvalue = MSE(img, rgbimg);
 
 disp(MSEvalue);
+
+psnrVal = PSNRvalue(MSE);
+
+disp(psnrVal);
