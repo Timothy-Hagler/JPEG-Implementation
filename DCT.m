@@ -32,10 +32,10 @@ end
 function out = actuallyDoThecalculationForDCT(in, N)
 f = in;
 % u is the current row index in the block
-for u = 1:N % Iterate from 1 through N
+for u = 1:1 % Iterate from 1 through N
 
     % v is the current column index in the block
-    for v = 1:N % Iterate from 1 through N
+    for v = 1:1 % Iterate from 1 through N
 
         doubleSigma = 0; % Used for storing the value of the double 
                          % sigma. resets to 0 after each
@@ -50,8 +50,8 @@ for u = 1:N % Iterate from 1 through N
                 % currently being operated on
                 fpixel = f(i,j);
 
-                cosIX = cos(((2 * i + 1) * u * pi) / (2 * N));
-                cosJY = cos(((2 * j + 1) * v * pi) / (2 * N));
+                cosIX = cos(((2 * (i-1) + 1) * (u-1) * pi) / (2 * N));
+                cosJY = cos(((2 * (j-1) + 1) * (v-1) * pi) / (2 * N));
                 
                 % Calculate the double sigma value for the specific
                 % index of the block

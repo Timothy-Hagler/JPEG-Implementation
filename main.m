@@ -1,6 +1,6 @@
 N = 8;
 
-[img, ~, ~] = imread("GroupProject/pepper.png");
+[img, ~, ~] = imread("pepper.png");
 
 yuvimg = rgb2ycbcr(img);
 
@@ -11,16 +11,17 @@ subsampledimage = FourTwoZeroSubSample(yuvimg);
 imwrite(subsampledimage, "peppersubbed.png");
 
 dctimg = DCT(subsampledimage, N);
+%dct2img = dct2(subsampledimage(1:8,1:8,1), 8,8);
 
 imwrite(dctimg,"pepperdct.png");
 
-quantizeimg = Quantize(dctimg, 10, N);
+quantizeimg = Quantize(dctimg, 100, N);
 
 imwrite(quantizeimg, "pepperquantize.png");
 
 dequantizedimg = Dequantize(quantizeimg, N);
 
-imwrite(quantizeimg, "pepperdequantize.png");
+imwrite(dequantizedimg, "pepperdequantize.png");
 
 idctimage = IDCT(dequantizedimg, N);
 
