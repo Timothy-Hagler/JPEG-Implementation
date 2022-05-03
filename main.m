@@ -42,8 +42,6 @@ psnrVal = PSNRvalue(double(MSEvalue));
 disp(psnrVal);
 
 
-
-
 % ALU.tif file
 
 [img, ~, ~] = imread("alu.tif");

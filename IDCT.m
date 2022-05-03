@@ -18,8 +18,8 @@ end
 function out = calculateIDCT(in, N)
     [rowsize,colsize, ~] = size(in);
     f = in;
-    for x = 1:N+1:rowsize % Iterate through all the rows
-        for y = 1:N+1:colsize % Iterate through all the columns
+    for x = 1:N:rowsize % Iterate through all the rows
+        for y = 1:N:colsize % Iterate through all the columns
             if x+N-1 <= rowsize && y+N-1 <= colsize
                 F = in(x:x+N-1, y:y+N-1);
                 idcted = actuallyDoTheCalculationForIDCT(F,N);
