@@ -11,11 +11,11 @@ for filename = ["pepper.png","alu.tif"]
     
     yuvimg = rgb2ycbcr(img);
     
-    imwrite(yuvimg, strcat(splitFileName(1),"yuv.png");
+    imwrite(yuvimg, strcat(splitFileName(1),"yuv.png"));
     
     subsampledimage = FourTwoZeroSubSample(yuvimg);
     
-    imwrite(subsampledimage, strcat(splitFileName(1),"subbed.png");
+    imwrite(subsampledimage, strcat(splitFileName(1),"subbed.png"));
     
     dctimg = DCT(subsampledimage, N);
     
