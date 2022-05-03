@@ -1,15 +1,17 @@
 function freqDomainImage = DCT(image, N)
     disp("running dct");
-    image = (image);
     
+    % split pieces of image
     y = image(:,:,1);
     cb = image(:,:,2);
     cr = image(:,:,3);
     
+    % calculate new values
     newY = calculateDCT(y, N);
     newCb = calculateDCT(cb, N);
     newCr = calculateDCT(cr, N);
     
+    % set new image
     freqDomainImage(:,:,1) = newY;
     freqDomainImage(:,:,2) = newCb; 
     freqDomainImage(:,:,3) = newCr;
