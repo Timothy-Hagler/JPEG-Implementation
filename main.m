@@ -1,8 +1,9 @@
+
 N = 8;      % size of blocks
+
 
 for filename = ["pepper.png","alu.tif"]
     splitFileName = strsplit(filename,".");
-    % Pepper file
     [img, ~, ~] = imread(filename);
     
     yuvimg = rgb2ycbcr(img);
@@ -22,22 +23,26 @@ for filename = ["pepper.png","alu.tif"]
         quantizeimg = Quantize(dctimg, qFactor, N);
 
         quantfile = sprintf("%s_quantized_qf%d.png",splitFileName(1), qFactor);
+
         imwrite(quantizeimg, quantfile);
         
         dequantizedimg = Dequantize(quantizeimg, N, qFactor);
         
         dequantfile = sprintf("%s_dequantized_qf%d.png",splitFileName(1), qFactor);
+
         imwrite(dequantizedimg, dequantfile);
         
         idctimage = IDCT(dequantizedimg, N);
         
         idctfile = sprintf("%s_idct_qf%d.png",splitFileName(1), qFactor);
+
         imwrite(idctimage, idctfile);
         
         rgbimg = ycbcr2rgb(idctimage);
     
     
         rgbfile = sprintf("output_%s_qf%d.png",splitFileName(1), qFactor);
+
         imwrite(rgbimg,rgbfile);
         
         MSEvalue = MSE(img, rgbimg);
@@ -48,5 +53,4 @@ for filename = ["pepper.png","alu.tif"]
         
         disp(psnrVal);
     end
-
 end
