@@ -6,7 +6,7 @@ fileID = fopen('PSNRs.txt','w');
 fclose(fileID);
 for filename = ["pepper.png","alu.tif"]
     splitFileName = strsplit(filename,".");
-    % Pepper file
+ 
     [img, ~, ~] = imread(filename);
     
     yuvimg = rgb2ycbcr(img);
@@ -40,7 +40,7 @@ for filename = ["pepper.png","alu.tif"]
         
         rgbimg = ycbcr2rgb(idctimage);
     
-        rgbfile = sprintf("%s_rgb_Q-%d.png",splitFileName(1), qFactor);
+        rgbfile = sprintf("output_%s_qf%d.png",splitFileName(1), qFactor);
         imwrite(rgbimg,rgbfile);
         
         MSEvalue = MSE(img, rgbimg);
@@ -62,45 +62,3 @@ for filename = ["pepper.png","alu.tif"]
     end
 
 end
-
-
-% % ALU.tif file
-% 
-% [img, ~, ~] = imread("alu.tif");
-% 
-% yuvimg = rgb2ycbcr(img);
-% 
-% imwrite(yuvimg, "aluyuv.png");
-% 
-% subsampledimage = FourTwoZeroSubSample(yuvimg);
-% 
-% imwrite(subsampledimage, "alusubbed.png");
-% 
-% dctimg = DCT(subsampledimage, N);
-% 
-% imwrite(dctimg,"aludct.png");
-% 
-% quantizeimg = Quantize(dctimg, 50, N);
-% 
-% imwrite(quantizeimg, "aluquantize.png");
-% 
-% dequantizedimg = Dequantize(quantizeimg, N, 50);
-% 
-% imwrite(dequantizedimg, "aludequantize.png");
-% 
-% idctimage = IDCT(dequantizedimg, N);
-% 
-% imwrite(idctimage, "aluidct.png");
-% 
-% rgbimg = ycbcr2rgb(idctimage);
-% 
-% 
-% imwrite(rgbimg,"alurgb.png");
-% 
-% MSEvalue = MSE(img, rgbimg);
-% 
-% disp(MSEvalue);
-% 
-% psnrVal = PSNRvalue(double(MSEvalue));
-% 
-% disp(psnrVal);
