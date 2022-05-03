@@ -1,36 +1,37 @@
-N = 8;
+N = 8;      % size of blocks
 
 % Pepper file
 [img, ~, ~] = imread("pepper.png");
 
 yuvimg = rgb2ycbcr(img);
 
-imwrite(yuvimg, "pepperyuv.png");
-
 subsampledimage = FourTwoZeroSubSample(yuvimg);
-
-imwrite(subsampledimage, "peppersubbed.png");
 
 dctimg = DCT(subsampledimage, N);
 
-imwrite(dctimg,"pepperdct.png");
-
+% qf = 100
 quantizeimg = Quantize(dctimg, 100, N);
-
-imwrite(quantizeimg, "pepperquantize.png");
-
 dequantizedimg = Dequantize(quantizeimg, N, 100);
 
-imwrite(dequantizedimg, "pepperdequantize.png");
+% qf = 50
+quantize50img = Quantize(dctimg, 50, N);
+dequantized50img = Dequantize(quantize50img, N, 50);
+
+% qf = 5
+quantize5img = Quantize(dctimg, 5, N);
+dequantized5img = Dequantize(quantize5img, N, 5);
 
 idctimage = IDCT(dequantizedimg, N);
-
-imwrite(idctimage, "pepperidct.png");
+idct50image = IDCT(dequantized50img, N);
+idct5image = IDCT(dequantized5img, N);
 
 rgbimg = ycbcr2rgb(idctimage);
+rgb50img = ycbcr2rgb(idct50image);
+rgb5img = ycbcr2rgb(idct5image);
 
-
-imwrite(rgbimg,"pepperrgb.png");
+imwrite(rgbimg,"output_pepper_qf100.png");
+imwrite(rgb50img,"output_pepper_qf50.png");
+imwrite(rgb5img,"output_pepper_qf5.png");
 
 MSEvalue = MSE(img, rgbimg);
 
@@ -49,32 +50,33 @@ disp(psnrVal);
 
 yuvimg = rgb2ycbcr(img);
 
-imwrite(yuvimg, "aluyuv.png");
-
 subsampledimage = FourTwoZeroSubSample(yuvimg);
-
-imwrite(subsampledimage, "alusubbed.png");
 
 dctimg = DCT(subsampledimage, N);
 
-imwrite(dctimg,"aludct.png");
+%qf = 100
+quantizeimg = Quantize(dctimg, 100, N);
+dequantizedimg = Dequantize(quantizeimg, N, 100);
 
-quantizeimg = Quantize(dctimg, 50, N);
+% qf = 50
+quantize50img = Quantize(dctimg, 50, N);
+dequantized50img = Dequantize(quantize50img, N, 50);
 
-imwrite(quantizeimg, "aluquantize.png");
-
-dequantizedimg = Dequantize(quantizeimg, N, 50);
-
-imwrite(dequantizedimg, "aludequantize.png");
+% qf = 5
+quantize5img = Quantize(dctimg, 5, N);
+dequantized5img = Dequantize(quantize5img, N, 5);
 
 idctimage = IDCT(dequantizedimg, N);
-
-imwrite(idctimage, "aluidct.png");
+idct50image = IDCT(dequantized50img, N);
+idct5image = IDCT(dequantized5img, N);
 
 rgbimg = ycbcr2rgb(idctimage);
+rgb50img = ycbcr2rgb(idct50image);
+rgb5img = ycbcr2rgb(idct5image);
 
-
-imwrite(rgbimg,"alurgb.png");
+imwrite(rgbimg,"output_alu_qf100.png");
+imwrite(rgb50img,"output_alu_qf50.png");
+imwrite(rgb5img,"output_alu_qf5.png");
 
 MSEvalue = MSE(img, rgbimg);
 
