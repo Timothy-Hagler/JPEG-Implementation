@@ -1,14 +1,15 @@
 function MSEout = MSE(original, output)
-    original = (original);
-    output = (output);
+disp("running mse")
+    original = double(original./255);
+    output = double(output)./255;
 
 [rowsize,colsize, ~] = size(original);
-sum =0;
+sum = 0;
 M =8;
 N=8;
-    for i = 1:M:rowsize
-        for j = 1:N:colsize
-            originalpixel= original(i, j);
+    for i = 1:rowsize
+        for j = 1:colsize
+            originalpixel = original(i, j);
             outputpixel = output(i ,j);
             diff = originalpixel - outputpixel; 
             squared = diff * diff;
@@ -17,5 +18,5 @@ N=8;
     end
 
     sum = sum /(M * N);
-    MSEout =sum;
+    MSEout = sum;
 end
